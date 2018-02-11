@@ -1,2 +1,2 @@
 # navrask.github.io
-Personal Website
+The landing page for my portfolio of art and achievements
