@@ -9,13 +9,11 @@ function init(){
     ctx = c.getContext("2d");
     xmax = window.innerWidth;
     ymax = window.innerHeight;
-    console.log("(x,y): (" + xmax + ", " + ymax + ")");
-    console.log("(x/2,y/2): (" + xmax/2 + ", " + ymax/2 + ")");
     canvasResize();
     redraw();
 }
 
-addEvent(window, "resize", canvasResize());
+window.addEventListener("resize", canvasResize());
 
 function canvasResize(){
     xmax = window.innerWidth;
