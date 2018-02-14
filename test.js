@@ -33,18 +33,16 @@ function drawTest(){
     ctx.stroke();
     for (var i = 0; i < numElements; i++){
         angle = 360/numElements;
-        console.log(angle)
     }
 }
 
 function redraw(){
-    //drawTest();
-    render();
+    drawTest();
+    //renderCracks();
 }
 
 var minSegmentHeight = 5;
-var groundHeight = ymax - 20;
-var color = "hsl(180, 80%, 80%)";
+var color = "hsla(173, 15%, 95%, 0.5)";
 var roughness = 9;
 var maxDifference = ymax / 5;
 
@@ -57,19 +55,15 @@ ctx.fillStyle = color;
 ctx.fillRect(0, 0, xmax, ymax);
 ctx.fillStyle = "hsla(0, 0%, 10%, 0.2)";
 
-function render() {
-    ctx.shadowBlur = 0;
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillRect(0, 0, size, size);
-    ctx.globalCompositeOperation = "lighter";
-    ctx.shadowBlur = 15;
-    var lightning = createLightning();
-    ctx.beginPath();
-    for (var i = 0; i < lightning.length; i++) {
-      ctx.lineTo(lightning[i].x, lightning[i].y);
+function renderCracks() {
+    for (var n = 0; n < numElements; n++){
+        var crck = generateCrack();
+        ctx.beginPath();
+        for (var i = 0; i < crck.length; i++) {
+        ctx.lineTo(crck[i].x, crck[i].y);
+        }
+        ctx.stroke();
     }
-    ctx.stroke();
-    requestAnimationFrame(render);
 }
 
 function createLightning() {
@@ -102,7 +96,7 @@ function createLightning() {
 //quadrant 3: negate x and y coords
 //quadrant 4: negate y coords
 
-function crack(len, angle){
+function generateCrack(angle){
     var quad;
     if (angle == 360){angle = 0}
     if (angle >= 0 && angle < 90){quad = 1;}
@@ -122,5 +116,11 @@ function crack(len, angle){
 
     var crack = [];
     crack.push({x: xmax/2, y: ymax/2});
-    crack.push({x: len + Math.random()})
+    var numCracks = Math.floor((Math.random() * 8) - 3);
+    var lenRemaining = Math.sqrt((xcoord-xmax/2)^2+(ycoord-ymax/2)^2);
+    for (var i = 1; i < numCracks; i++){
+
+    }
+    crack.push({x: xcoord, y: ycoord});
+    return crack;
 }
