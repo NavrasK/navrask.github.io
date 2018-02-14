@@ -55,12 +55,26 @@ ctx.fillStyle = color;
 ctx.fillRect(0, 0, xmax, ymax);
 ctx.fillStyle = "hsla(0, 0%, 10%, 0.2)";
 
+//quadrant 1: no changes
+//quadrant 2: negate x coords
+//quadrant 3: negate x and y coords
+//quadrant 4: negate y coords
+
 function renderCracks() {
     for (var n = 0; n < numElements; n++){
-        var crck = generateCrack();
+        angle = 1;//TODO
+
+        var quad;
+        if (angle == 360){angle = 0}
+        if (angle >= 0 && angle < 90){quad = 1;}
+        else if (angle >= 90 && angle < 180){quad = 2; angle = angle - 90;}
+        else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
+        else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
+
+        var crck = generateCrack(angle);
         ctx.beginPath();
         for (var i = 0; i < crck.length; i++) {
-        ctx.lineTo(crck[i].x, crck[i].y);
+            ctx.lineTo(crck[i].x, crck[i].y);
         }
         ctx.stroke();
     }
@@ -91,19 +105,7 @@ function createLightning() {
     return lightning;
 }
 
-//quadrant 1: no changes
-//quadrant 2: negate x coords
-//quadrant 3: negate x and y coords
-//quadrant 4: negate y coords
-
 function generateCrack(angle){
-    var quad;
-    if (angle == 360){angle = 0}
-    if (angle >= 0 && angle < 90){quad = 1;}
-    else if (angle >= 90 && angle < 180){quad = 2; angle = angle - 90;}
-    else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
-    else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
-
     if ((xmax/2)*Math.tan(angle) <= ymax){
         var ylen = (xmax/2)*Math.tan(angle);
         var xcoord = xmax + 5;
