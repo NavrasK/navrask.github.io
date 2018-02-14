@@ -119,8 +119,6 @@ function crack(len, angle){
         var xcoord = (xmax/2 - xlen) + Math.floor((Math.random() * 10) - 10);
         var ycoord = ymax/2 + 5;
     }
-    var xcoord = xlen;
-    var ycoord = ;
 
     var crack = [];
     crack.push({x: xmax/2, y: ymax/2});
