@@ -1,4 +1,4 @@
-var c, ctx, xmax, ymax;
+var c, ctx, xmax, xmin, ymax, ymin, stage;
 
 var numElements = 6;
 
@@ -9,11 +9,11 @@ function init(){
     ctx = c.getContext("2d");
     xmax = window.innerWidth;
     ymax = window.innerHeight;
+    stage = new createjs.Stage("c");
+    window.addEventListener("resize", canvasResize());
     canvasResize();
     redraw();
 }
-
-window.addEventListener("resize", canvasResize());
 
 function canvasResize(){
     xmax = window.innerWidth;
@@ -41,20 +41,6 @@ function redraw(){
     //renderCracks();
 }
 
-var minSegmentHeight = 5;
-var color = "hsla(173, 15%, 95%, 0.5)";
-var roughness = 9;
-var maxDifference = ymax / 5;
-
-ctx.globalCompositeOperation = "lighter";
-
-ctx.strokeStyle = color;
-ctx.shadowColor = color;
-
-ctx.fillStyle = color;
-ctx.fillRect(0, 0, xmax, ymax);
-ctx.fillStyle = "hsla(0, 0%, 10%, 0.2)";
-
 //quadrant 1: no changes
 //quadrant 2: negate x coords
 //quadrant 3: negate x and y coords
@@ -71,12 +57,18 @@ function renderCracks() {
         else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
         else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
 
-        var crck = generateCrack(angle);
-        ctx.beginPath();
-        for (var i = 0; i < crck.length; i++) {
-            ctx.lineTo(crck[i].x, crck[i].y);
+        var cracks = [];
+        for (var i = 0; i < numElements; i++){
+            cracks[i] = generateCrack(angle);
         }
-        ctx.stroke();
+        
+        for (var c = 0; c < cracks.size(); c++){
+            ctx.beginPath();
+            for (var i = 0; i < cracks.length; i++) {
+                ctx.lineTo(cracks[i].x, cracks[i].y);
+            }
+            ctx.stroke();
+        }
     }
 }
 
