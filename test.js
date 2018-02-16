@@ -97,24 +97,31 @@ function createLightning() {
     return lightning;
 }
 
+function randomInt(lower,upper){
+    return Math.floor(Math.random()*(upper-lower+1)+lower);
+}
+
 function generateCrack(angle){
     if ((xmax/2)*Math.tan(angle) <= ymax){
-        var ylen = (xmax/2)*Math.tan(angle);
-        var xcoord = xmax + 5;
-        var ycoord = (ymax/2 - ylen) + Math.floor((Math.random() * 10) - 10);
+        var yLen = (xmax/2)*Math.tan(angle);
+        var xDest = xmax + 5;
+        var yDest = (ymax/2 - yLen) + randomInt(-10,10);
     } else {
-        var xlen = (ymax/2)/(Math.tan(angle));
-        var xcoord = (xmax/2 - xlen) + Math.floor((Math.random() * 10) - 10);
-        var ycoord = ymax/2 + 5;
+        var xLen = (ymax/2)/(Math.tan(angle));
+        var xDest = (xmax/2 - xLen) + randomInt(-10,10);
+        var yDest = ymax/2 + 5;
     }
 
     var crack = [];
     crack.push({x: xmax/2, y: ymax/2});
-    var numCracks = Math.floor((Math.random() * 8) - 3);
-    var lenRemaining = Math.sqrt((xcoord-xmax/2)^2+(ycoord-ymax/2)^2);
-    for (var i = 1; i < numCracks; i++){
-
+    var numCracks = randomInt(2,7);
+    var lenRemaining = Math.sqrt((xDest-xmax/2)^2+(yDest-ymax/2)^2);
+    //currX = 
+    //currY = 
+    for (var i = 1; i < numCracks-1; i++){
+        crack.push({x: xDest + (xmax/numCracks), y: yDest + (ymax/numCracks)});
+        //lenRemaining = 
     }
-    crack.push({x: xcoord, y: ycoord});
+    crack.push({x: xDest, y: yDest});
     return crack;
 }
