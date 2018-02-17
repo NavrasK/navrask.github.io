@@ -42,13 +42,14 @@ function redraw(){
 }
 
 //quadrant 1: no changes
-//quadrant 2: negate x coords
-//quadrant 3: negate x and y coords
-//quadrant 4: negate y coords
+//quadrant 2: x = xmax - x
+//quadrant 3: x = xmax - x and y = y + ymax
+//quadrant 4: y - y + ymax
 
 function renderCracks() {
+    var cracks = []
     for (var n = 0; n < numElements; n++){
-        angle = 1;//TODO
+        angle = n*(Math.floor(360/numElements)+randomInt(-5,5));
 
         var quad;
         if (angle == 360){angle = 0}
@@ -56,72 +57,57 @@ function renderCracks() {
         else if (angle >= 90 && angle < 180){quad = 2; angle = angle - 90;}
         else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
         else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
-
-        var cracks = [];
-        for (var i = 0; i < numElements; i++){
-            cracks[i] = generateCrack(angle);
-        }
+        
+        cracks[n] = generateCrack(angle);
         
         for (var c = 0; c < cracks.size(); c++){
             ctx.beginPath();
             for (var i = 0; i < cracks.length; i++) {
-                ctx.lineTo(cracks[i].x, cracks[i].y);
+                switch (q){
+                    case 2:
+                        ctx.lineTo(xmax - cracks[i].x, cracks[i].y);
+                        break;
+                    case 3:
+                        ctx.lineTo(xmax - cracks[i].x, cracks[i].y + ymax);
+                        break;
+                    case 4:
+                        ctx.lineTo(cracks[i].x, cracks[i].y + ymax);
+                        break;
+                    default: 
+                        ctx.lineTo(cracks[i].x, cracks[i].y);
+                        break;
+                }
             }
             ctx.stroke();
         }
     }
 }
 
-function createLightning() {
-    var segmentHeight = groundHeight - ymax/2;
-    var lightning = [];
-    lightning.push({x: center.x, y: center.y});
-    lightning.push({x: Math.random() * (size - 100) + 50, y: groundHeight + (Math.random() - 0.9) * 50});
-    var currDiff = maxDifference;
-    while (segmentHeight > minSegmentHeight) {
-      var newSegments = [];
-      for (var i = 0; i < lightning.length - 1; i++) {
-        var start = lightning[i];
-        var end = lightning[i + 1];
-        var midX = (start.x + end.x) / 2;
-        var newX = midX + (Math.random() * 2 - 1) * currDiff;
-        newSegments.push(start, {x: newX, y: (start.y + end.y) / 2});
-      }
-      
-      newSegments.push(lightning.pop());
-      lightning = newSegments;
-      
-      currDiff /= roughness;
-      segmentHeight /= 2;
-    }
-    return lightning;
-}
-
-function randomInt(lower,upper){
+function randomInt(lower, upper){
     return Math.floor(Math.random()*(upper-lower+1)+lower);
 }
 
 function generateCrack(angle){
     if ((xmax/2)*Math.tan(angle) <= ymax){
         var yLen = (xmax/2)*Math.tan(angle);
-        var xDest = xmax + 5;
+        var xDest = xmax;
         var yDest = (ymax/2 - yLen) + randomInt(-10,10);
     } else {
         var xLen = (ymax/2)/(Math.tan(angle));
         var xDest = (xmax/2 - xLen) + randomInt(-10,10);
-        var yDest = ymax/2 + 5;
+        var yDest = ymax/2;
     }
 
     var crack = [];
     crack.push({x: xmax/2, y: ymax/2});
     var numCracks = randomInt(2,7);
     var lenRemaining = Math.sqrt((xDest-xmax/2)^2+(yDest-ymax/2)^2);
-    //currX = 
-    //currY = 
-    for (var i = 1; i < numCracks-1; i++){
-        crack.push({x: xDest + (xmax/numCracks), y: yDest + (ymax/numCracks)});
-        //lenRemaining = 
+
+    for (var i = 1; i <= numCracks; i++){
+        var d = i*(-5 + lenRemaining / numCracks);
+        crack.push({x: (i*(xDest/numCracks))+randomInt(-d,d), y: (i*(yDest/numCracks))+randomInt(-d,d)});
     }
+
     crack.push({x: xDest, y: yDest});
     return crack;
 }
