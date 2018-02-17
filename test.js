@@ -41,11 +41,6 @@ function redraw(){
     renderCracks();
 }
 
-//quadrant 1: no changes
-//quadrant 2: x = xmax - x
-//quadrant 3: x = xmax - x and y = y + ymax
-//quadrant 4: y - y + ymax
-
 function renderCracks() {
     var cracks = []
     for (var n = 0; n < numElements; n++){
@@ -58,8 +53,8 @@ function renderCracks() {
         else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
         else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
         
-        crack = generateCrack(angle);
-        drawCrack(quad, crack);
+        crack = generateCrack(quad, angle);
+        drawCrack(crack);
     }
 }
 
@@ -72,27 +67,12 @@ function sleep(ms) {
     }
 }
 
-function drawCrack(q, crack){
+function drawCrack(crack){
     ctx.moveTo(xmax/2, ymax/2);
     var colr  = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
     ctx.strokeStyle = colr;
     ctx.beginPath();
-    for (var i = 0; i < crack.length; i++) {
-        switch (q){
-            case 2:
-                ctx.lineTo(xmax - crack[i].x, crack[i].y);
-                break;
-            case 3:
-                ctx.lineTo(xmax - crack[i].x, crack[i].y + ymax);
-                break;
-            case 4:
-                ctx.lineTo(crack[i].x, crack[i].y + ymax);
-                break;
-            default: 
-                ctx.lineTo(crack[i].x, crack[i].y);
-                break;
-        }
-    }
+    for (var i = 0; i < crack.length; i++) {ctx.lineTo(crack[i].x, crack[i].y);}
     ctx.stroke();
 }
 
@@ -100,7 +80,12 @@ function randomInt(lower, upper){
     return Math.floor(Math.random()*(upper-lower+1)+lower);
 }
 
-function generateCrack(angle){
+//quadrant 1: no changes
+//quadrant 2: x = xmax - x
+//quadrant 3: x = xmax - x and y = y + ymax
+//quadrant 4: y - y + ymax
+
+function generateCrack(q, angle){//add quad
     if ((xmax/2)*Math.tan(angle) <= ymax){
         var yLen = (xmax/2)*Math.tan(angle);
         var xDest = xmax;
