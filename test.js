@@ -1,4 +1,4 @@
-var c, ctx, xmax, xmin, ymax, ymin, stage;
+var c, ctx, xmax, ymax, stage;
 
 var numElements = 6;
 
@@ -37,8 +37,8 @@ function drawTest(){
 }
 
 function redraw(){
-    drawTest();
-    //renderCracks();
+    //drawTest();
+    renderCracks();
 }
 
 //quadrant 1: no changes
@@ -58,29 +58,42 @@ function renderCracks() {
         else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
         else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
         
-        cracks[n] = generateCrack(angle);
-        
-        for (var c = 0; c < cracks.size(); c++){
-            ctx.beginPath();
-            for (var i = 0; i < cracks.length; i++) {
-                switch (q){
-                    case 2:
-                        ctx.lineTo(xmax - cracks[i].x, cracks[i].y);
-                        break;
-                    case 3:
-                        ctx.lineTo(xmax - cracks[i].x, cracks[i].y + ymax);
-                        break;
-                    case 4:
-                        ctx.lineTo(cracks[i].x, cracks[i].y + ymax);
-                        break;
-                    default: 
-                        ctx.lineTo(cracks[i].x, cracks[i].y);
-                        break;
-                }
-            }
-            ctx.stroke();
+        crack = generateCrack(angle);
+        drawCrack(quad, crack);
+    }
+}
+
+function sleep(ms) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > ms){
+            break;
         }
     }
+}
+
+function drawCrack(q, crack){
+    ctx.moveTo(xmax/2, ymax/2);
+    var colr  = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    ctx.strokeStyle = colr;
+    ctx.beginPath();
+    for (var i = 0; i < crack.length; i++) {
+        switch (q){
+            case 2:
+                ctx.lineTo(xmax - crack[i].x, crack[i].y);
+                break;
+            case 3:
+                ctx.lineTo(xmax - crack[i].x, crack[i].y + ymax);
+                break;
+            case 4:
+                ctx.lineTo(crack[i].x, crack[i].y + ymax);
+                break;
+            default: 
+                ctx.lineTo(crack[i].x, crack[i].y);
+                break;
+        }
+    }
+    ctx.stroke();
 }
 
 function randomInt(lower, upper){
