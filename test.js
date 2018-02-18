@@ -1,6 +1,6 @@
 var c, ctx, xmax, ymax, stage;
 
-var numElements = 6;
+var numElements = 4;
 
 window.onload = init;
 
@@ -44,17 +44,18 @@ function redraw(){
 function renderCracks() {
     var cracks = []
     for (var n = 0; n < numElements; n++){
-        angle = n*(Math.floor(360/numElements)+randomInt(-5,5));
+        angle = (Math.floor(360/(numElements-n)));
+        console.log("angle: " + angle);
 
         var quad;
         if (angle == 360){angle = 0}
-        if (angle >= 0 && angle < 90){quad = 1;}
-        else if (angle >= 90 && angle < 180){quad = 2; angle = angle - 90;}
-        else if (angle >= 180 && angle < 270){quad = 3; angle = angle - 180;}
-        else if (angle >= 270 && angle < 360){quad = 4; angle = angle - 270;}
+        if (angle >= 0 && angle <= 90){quad = 1;}
+        else if (angle > 90 && angle <= 180){quad = 2; angle = 180 - angle;}
+        else if (angle > 180 && angle <= 270){quad = 3; angle = angle - 180;}
+        else if (angle > 270 && angle <= 360){quad = 4; angle = 360 - angle;}
+        console.log("q1 version: " + angle);
         
-        crack = generateCrack(quad, angle);
-        drawCrack(crack);
+        drawCrack(generateCrack(quad, angle));
     }
 }
 
@@ -80,32 +81,48 @@ function randomInt(lower, upper){
     return Math.floor(Math.random()*(upper-lower+1)+lower);
 }
 
-//quadrant 1: no changes
-//quadrant 2: x = xmax - x
-//quadrant 3: x = xmax - x and y = y + ymax
-//quadrant 4: y - y + ymax
+function generateCrack(q, angle){
+    if (xmax*Math.tan(angle) > ymax/2){
+        tempY = ymax/2;
+        tempX = tempY/(Math.tan(angle));
+    }else{
+        tempX = xmax/2;
+        tempY = tempX*Math.tan(angle);
+    }
 
-function generateCrack(q, angle){//add quad
-    if ((xmax/2)*Math.tan(angle) <= ymax){
-        var yLen = (xmax/2)*Math.tan(angle);
-        var xDest = xmax;
-        var yDest = (ymax/2 - yLen) + randomInt(-10,10);
-    } else {
-        var xLen = (ymax/2)/(Math.tan(angle));
-        var xDest = (xmax/2 - xLen) + randomInt(-10,10);
-        var yDest = ymax/2;
+    var xcoeff, ycoeff;
+    switch(q){
+        case 2: 
+            xcoeff = -1;
+            ycoeff = 1;
+            break;
+        case 3:
+            xcoeff = -1;
+            ycoeff = -1;
+            break;
+        case 4:
+            ycoeff = -1;
+            xcoeff = 1;
+            break;
+        default:
+            xcoeff = 1;
+            ycoeff = 1;
+            break;
     }
 
     var crack = [];
     crack.push({x: xmax/2, y: ymax/2});
     var numCracks = randomInt(2,7);
-    var lenRemaining = Math.sqrt((xDest-xmax/2)^2+(yDest-ymax/2)^2);
 
-    for (var i = 1; i <= numCracks; i++){
-        var d = i*(-5 + lenRemaining / numCracks);
-        crack.push({x: (i*(xDest/numCracks))+randomInt(-d,d), y: (i*(yDest/numCracks))+randomInt(-d,d)});
+    var tempCracks = [];
+    for (var i = 1; i < numCracks; i++){
+        tempCracks.push({x: i*(tempX/numCracks) + randomInt((tempX/numCracks - 15), (tempX/numCracks + 15)), y: i*(tempY/numCracks) + randomInt((tempY/numCracks - 15), (tempY/numCracks + 15))});
     }
 
-    crack.push({x: xDest, y: yDest});
+    for (var i = 0; i < tempCracks.length; i++){
+        crack.push({x: xmax/2 + xcoeff*tempCracks[i].x, y: ymax/2 - ycoeff*tempCracks[i].y});
+    }
+
+    crack.push({x: xmax/2 + xcoeff*tempX, y: ymax/2 - ycoeff*tempY});
     return crack;
 }
