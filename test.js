@@ -37,6 +37,7 @@ function drawTest(){
 }
 
 function redraw(){
+    ctx.clearRect(0, 0, xmax, ymax);
     //drawTest();
     renderCracks();
 }
@@ -44,7 +45,7 @@ function redraw(){
 function renderCracks() {
     var cracks = []
     for (var n = 0; n < numElements; n++){
-        angle = (Math.floor(360/(numElements-n)));
+        angle = (n*Math.floor(360/(numElements)));
         console.log("angle: " + angle);
 
         var quad;
