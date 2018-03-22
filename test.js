@@ -117,7 +117,9 @@ function generateCrack(q, angle){
 
     var tempCracks = [];
     for (var i = 1; i < numCracks; i++){
-        tempCracks.push({x: i*(tempX/numCracks) + randomInt((tempX/numCracks - 15), (tempX/numCracks + 15)), y: i*(tempY/numCracks) + randomInt((tempY/numCracks - 15), (tempY/numCracks + 15))});
+        var xcoord = (tempX/numCracks) + randomInt((tempX/numCracks - 20), (tempX/numCracks + 20));
+        var ycoord = (tempY/numCracks) + randomInt((tempY/numCracks - 20), (tempY/numCracks + 20));
+        tempCracks.push({x: i*xcoord, y: i*ycoord});
     }
 
     for (var i = 0; i < tempCracks.length; i++){
@@ -125,5 +127,6 @@ function generateCrack(q, angle){
     }
 
     crack.push({x: xmax/2 + xcoeff*tempX, y: ymax/2 - ycoeff*tempY});
+    console.log(crack);
     return crack;
 }
