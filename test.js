@@ -1,6 +1,6 @@
 var c, ctx, xmax, ymax, stage;
 
-var numElements = 4;
+var numElements = 20;
 
 window.onload = init;
 
@@ -71,8 +71,8 @@ function sleep(ms) {
 
 function drawCrack(crack){
     ctx.moveTo(xmax/2, ymax/2);
-    var colr  = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-    ctx.strokeStyle = colr;
+    //var colr  = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    //ctx.strokeStyle = colr;
     ctx.beginPath();
     for (var i = 0; i < crack.length; i++) {ctx.lineTo(crack[i].x, crack[i].y);}
     ctx.stroke();
