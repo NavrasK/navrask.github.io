@@ -1,4 +1,5 @@
 // Creates a cracked appearance, radiating from the center of the screen, with a specified number of cracks
+// https://math.stackexchange.com/questions/3180133/subdivide-a-rectangle-into-n-equal-parts-by-area-radially/3180219#3180219
 
 var c, ctx, xmax, ymax, o, stage;
 
@@ -85,7 +86,7 @@ function addCracks(crack){
     //     crack.push({x: crackx, y: cracky});
     // }
     // crack.push(end);
-    crack = mutateCracks(crack, numCracks);
+    // crack = mutateCracks(crack, numCracks);
     return crack;
 }
 
@@ -111,7 +112,7 @@ function mutateCracks(crack, numCracks){
 
 function calcAngles(){
     // Measured in Radians
-    // 0 is to the right of origin o
+    // 0 is to the right of origin, and continues clockwise
     var angles = [];
     for (var i = 0; i < numElements; i++){
         var ang = (i / numElements) * (2 * Math.PI);
