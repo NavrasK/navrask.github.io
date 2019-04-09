@@ -87,8 +87,6 @@ function addCracks(crack){
     // }
     // crack.push(end);
     // crack = mutateCracks(crack, numCracks);
-<<<<<<< Updated upstream
-=======
     crack = mutateCrack(crack, numCracks);
     return crack;
 }
@@ -101,7 +99,6 @@ function mutateCrack(crack, numCracks){
         crack.push(prev);
     }
     crack.push(end);
->>>>>>> Stashed changes
     return crack;
 }
 
