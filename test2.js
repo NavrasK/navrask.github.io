@@ -4,17 +4,17 @@
 var c, ctx, xmax, ymax, o, stage;
 
 // How many segments are drawn, Note: minimum 2
-var numElements = 0;
+var numElements = 3;
 
 window.onload = init;
 
 function init(){
     // Removed for testing 
-    numElements = window.prompt("Number of elements (must be greater than 1)", "6");
-    if (numElements === null || numElements <= 1){
-        window.alert("Invalid value");
-        window.location.replace("index.html");
-    }
+    // numElements = window.prompt("Number of elements (must be greater than 1)", "6");
+    // if (numElements === null || numElements <= 1){
+    //     window.alert("Invalid value");
+    //     window.location.replace("index.html");
+    // }
     c = document.getElementById("c");
     ctx = c.getContext("2d");
     stage = new createjs.Stage("c");
@@ -74,12 +74,12 @@ function drawCrack(crack){
 }
 
 function addCracks(crack){
-    // var end = crack.pop();
-    // var start = crack[0];
     var numCracks = 2;
     while (rand(0, 3) > 1){
         numCracks = numCracks + 1;
     }
+    // var end = crack.pop();
+    // var start = crack[0];
     // for (var i = 0; i < numCracks - 1 ; i++){
     //     var crackx = ((numCracks - i) / numCracks) * start.x + (i / numCracks) * end.x;
     //     var cracky = ((numCracks - i) / numCracks) * start.y + (i / numCracks) * end.y;
@@ -87,7 +87,46 @@ function addCracks(crack){
     // }
     // crack.push(end);
     // crack = mutateCracks(crack, numCracks);
+<<<<<<< Updated upstream
+=======
+    crack = mutateCrack(crack, numCracks);
     return crack;
+}
+
+function mutateCrack(crack, numCracks){
+    var end = crack.pop();
+    var prev = crack[0];
+    for (var i = numCracks; i > 0; i--){
+        prev = mutate(prev, i, end);
+        crack.push(prev);
+    }
+    crack.push(end);
+>>>>>>> Stashed changes
+    return crack;
+}
+
+function mutate(prev, num, end){
+    var distToEnd = Math.sqrt(Math.pow(Math.abs(prev.x - end.x), 2) + Math.pow(Math.abs(prev.y - end.y), 2));
+    var dist = distToEnd / num;
+    var ang = Math.atan((end.y - prev.y) / (end.x - prev.x));
+    var maxDeviation = 0.025 / num;
+    var nextAngle = ang + (rand(-1 * maxDeviation, maxDeviation));
+    var nextX, nextY, distX, distY;
+    distX = Math.cos(nextAngle) * dist;
+    distY = Math.sin(nextAngle) * dist;
+    nextX = prev.x + distX;
+    nextY = prev.y + distY;
+    // if (nextAngle >= Math.PI){
+    //     nextY = prev.y - Math.sin(nextAngle) * dist;
+    // } else {
+    //     nextY = prev.y + Math.sin(nextAngle) * dist;
+    // }
+    // if (nextAngle <= Math.PI / 2 || nextAngle >= Math.PI * 3 / 2){
+    //     nextX = prev.x + Math.cos(nextAngle) * dist;
+    // } else {
+    //     nextX = prev.x - Math.cos(nextAngle) * dist;
+    // }
+    return {x: nextX, y: nextY};
 }
 
 function mutateCracks(crack, numCracks){
