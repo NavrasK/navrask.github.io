@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
 
@@ -11,7 +12,7 @@
   <link rel="stylesheet" href="test.css">
 
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-  
+
   <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
@@ -21,7 +22,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -29,10 +30,64 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+
+
 </head>
 
-<body style="margin:auto; display:block;">
-	<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin:auto; display:block;"></iframe>
-	<br>
-	<iframe src="https://open.spotify.com/embed/playlist/1Cnmtn39Z6la8J4Owud8iW" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin:auto; display:block;"></iframe>
+<body style="overflow-y: scroll; background-image: url(bg.png)">
+
+  <!-- flexbox -->
+  <div class="pt-32 flex flex-wrap content-center justify-around scrolling-auto">
+    <img class="max-w-md" src="poster.png" />
+
+    <!-- -->
+    <div class="p-8">
+
+      <!-- title and synopsis -->
+      <div class="top-0">
+        <p class="text-5xl text-gray-100">
+          Hard Drive
+        </p>
+        <p class="break-all pt-8 text-gray-300">
+          Synopsis there will be some more text here
+        </p>
+      </div>
+
+      <!-- trailer -->
+      <div class="pt-16">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+          style="margin:auto; display:block;"> </iframe>
+      </div>
+
+      <!-- button -->
+      <div class="pt-32 justify-around flex">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl">
+          <a href="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU">Watch now</a>
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl">
+          <a href="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU">BTS</a>
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl">
+          <a href="/hd-gallery">Media</a>
+        </button>
+      </div>
+    </div>
+
+    <!-- spotify -->
+    <div class="p-8">
+
+      <iframe src="https://open.spotify.com/embed/playlist/1Cnmtn39Z6la8J4Owud8iW" width="300" height="380"
+        frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin:auto; display:block;"></iframe>
+    </div>
+
+
+
+  </div>
+
+
+  </div>
+  </div>
 </body>
