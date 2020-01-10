@@ -31,27 +31,25 @@
   <meta name="msapplication-TileImage" content="img/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
-
-
+  <link rel="stylesheet" type="text/css" href="webfontkit/stylesheet.css" charset="utf-8"/>
 </head>
 
-<body style="overflow-y: scroll; background-image: url(bg.png)">
+<body style="overflow-y: scroll; background-image: url(HardDrive/bg.png)">
 
   <!-- flexbox -->
-  <div class="pt-32 flex flex-wrap content-center justify-around scrolling-auto">
-    <img class="max-w-md" src="poster.png" />
+  <div class="pt-16 flex flex-wrap content-center justify-around scrolling-auto">
+    <img class="max-w-lg" src="HardDrive/poster.png" />
 
     <!-- -->
     <div class="p-8">
 
       <!-- title and synopsis -->
       <div class="top-0">
-        <p class="text-5xl text-gray-100">
+        <p class="text-6xl text-gray-100" style="font-family: 'gunplayregular';">
           Hard Drive
         </p>
-        <p class="break-all pt-8 text-gray-300">
-          Synopsis there will be some more text here
+        <p class="break-words pt-8 text-gray-300">
+          A pizza delivery boy is at the wrong place at the wrong time, and is on the run from a group of criminals after witnessing a murder.
         </p>
       </div>
 
@@ -64,14 +62,16 @@
 
       <!-- button -->
       <div class="pt-32 justify-around flex">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl">
-          <a href="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU">Watch now</a>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-2xl opacity-50 cursor-not-allowed">
+          <!--<a href="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU">Watch now</a>-->
+		  <a>Watch Now (Coming Soon!)</a>
         </button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl">
-          <a href="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU">BTS</a>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-2xl opacity-50 cursor-not-allowed">
+          <!--<a href="https://www.youtube-nocookie.com/embed/o_sK9uQOaoU">BTS</a>-->
+		  <a>BTS (Coming Soon!)</a>
         </button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl">
-          <a href="/hd-gallery">Media</a>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-2xl">
+          <a href="/hd-gallery">Media Gallery</a>
         </button>
       </div>
     </div>
