@@ -5187,20 +5187,6 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			view: impl.view
 		});
 };
-var $author$project$Main$reflectorA = 'EJMZALYXVBWFCRQUONTSPIKHGD';
-var $author$project$Main$reflectorC = 'FVPJIAOYEDRZXWGCTKUQSBNMHL';
-var $author$project$Main$reflectorUKW = 'QYHOGNECVPUZTFDJAXWMKISRBL';
-var $author$project$Main$chooseReflector = function (reflectorNum) {
-	return (reflectorNum === 1) ? $author$project$Main$reflectorA : ((reflectorNum === 2) ? $author$project$Main$reflectorB : ((reflectorNum === 3) ? $author$project$Main$reflectorC : $author$project$Main$reflectorUKW));
-};
-var $author$project$Main$rotor4 = A4($author$project$Main$Rotor, 'ESOVPZJAYQUIRHXLNFTGKDCMWB', 0, 9, 9);
-var $author$project$Main$rotor5 = A4($author$project$Main$Rotor, 'VZBRGITYUPSDNHLXAWMJQOFECK', 0, 25, 25);
-var $author$project$Main$rotor6 = A4($author$project$Main$Rotor, 'JPGVOUMFYQBENHZRDKASXLICTW', 0, 25, 12);
-var $author$project$Main$rotor7 = A4($author$project$Main$Rotor, 'NZJHGRCXMYSWBOUFAIVLPEKQDT', 0, 25, 12);
-var $author$project$Main$rotor8 = A4($author$project$Main$Rotor, 'FKQHTLXOCBJSPDZRAMEWNIUYGV', 0, 25, 12);
-var $author$project$Main$chooseRotor = function (rotorNum) {
-	return (rotorNum === 2) ? $author$project$Main$rotor2 : ((rotorNum === 3) ? $author$project$Main$rotor3 : ((rotorNum === 4) ? $author$project$Main$rotor4 : ((rotorNum === 5) ? $author$project$Main$rotor5 : ((rotorNum === 6) ? $author$project$Main$rotor6 : ((rotorNum === 7) ? $author$project$Main$rotor7 : ((rotorNum === 8) ? $author$project$Main$rotor8 : $author$project$Main$rotor1))))));
-};
 var $author$project$Main$alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var $elm$core$Dict$RBEmpty_elm_builtin = {$: 'RBEmpty_elm_builtin'};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
@@ -5510,33 +5496,25 @@ var $author$project$Main$update = F2(
 						rotorR: A2($author$project$Main$updateRotorPosition, model.rotorR, newPos)
 					});
 			case 'ChangeRotorL':
-				var rotorNum = msg.a;
+				var newRotor = msg.a;
 				return _Utils_update(
 					model,
-					{
-						rotorL: $author$project$Main$chooseRotor(rotorNum)
-					});
+					{rotorL: newRotor});
 			case 'ChangeRotorM':
-				var rotorNum = msg.a;
+				var newRotor = msg.a;
 				return _Utils_update(
 					model,
-					{
-						rotorM: $author$project$Main$chooseRotor(rotorNum)
-					});
+					{rotorM: newRotor});
 			case 'ChangeRotorR':
-				var rotorNum = msg.a;
+				var newRotor = msg.a;
 				return _Utils_update(
 					model,
-					{
-						rotorR: $author$project$Main$chooseRotor(rotorNum)
-					});
+					{rotorR: newRotor});
 			default:
-				var reflectorNum = msg.a;
+				var newReflector = msg.a;
 				return _Utils_update(
 					model,
-					{
-						reflector: $author$project$Main$chooseReflector(reflectorNum)
-					});
+					{reflector: newReflector});
 		}
 	});
 var $mdgriffith$elm_ui$Internal$Model$Rgba = F4(
@@ -12643,7 +12621,7 @@ var $author$project$Main$rotorboard = F2(
 					})
 				]));
 	});
-var $author$project$Main$slateGray = A3($mdgriffith$elm_ui$Element$rgb255, 112, 128, 144);
+var $author$project$Main$slateGrey = A3($mdgriffith$elm_ui$Element$rgb255, 112, 128, 144);
 var $author$project$Main$enigmaView = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
@@ -12652,7 +12630,7 @@ var $author$project$Main$enigmaView = function (model) {
 			[
 				A2($author$project$Main$rotorboard, ((3 * $author$project$Main$keyRadius) / 2) | 0, model),
 				A4($author$project$Main$lampboard, $author$project$Main$black, 2 * $author$project$Main$keyRadius, ((3 * $author$project$Main$keyRadius) / 2) | 0, model.onLamp),
-				A3($author$project$Main$keyboard, $author$project$Main$slateGray, 2 * $author$project$Main$keyRadius, ((3 * $author$project$Main$keyRadius) / 2) | 0)
+				A3($author$project$Main$keyboard, $author$project$Main$slateGrey, 2 * $author$project$Main$keyRadius, ((3 * $author$project$Main$keyRadius) / 2) | 0)
 			]));
 };
 var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
@@ -12859,11 +12837,668 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 	});
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
+var $author$project$Main$ChangeReflector = function (a) {
+	return {$: 'ChangeReflector', a: a};
+};
+var $author$project$Main$ChangeRotorL = function (a) {
+	return {$: 'ChangeRotorL', a: a};
+};
+var $author$project$Main$ChangeRotorM = function (a) {
+	return {$: 'ChangeRotorM', a: a};
+};
+var $author$project$Main$ChangeRotorR = function (a) {
+	return {$: 'ChangeRotorR', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$Top = {$: 'Top'};
+var $mdgriffith$elm_ui$Element$alignTop = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$Top);
+var $author$project$Main$grey = A3($mdgriffith$elm_ui$Element$rgb255, 230, 230, 230);
+var $mdgriffith$elm_ui$Element$Input$Above = {$: 'Above'};
+var $mdgriffith$elm_ui$Element$Input$Label = F3(
+	function (a, b, c) {
+		return {$: 'Label', a: a, b: b, c: c};
+	});
+var $mdgriffith$elm_ui$Element$Input$labelAbove = $mdgriffith$elm_ui$Element$Input$Label($mdgriffith$elm_ui$Element$Input$Above);
+var $mdgriffith$elm_ui$Element$Input$Option = F2(
+	function (a, b) {
+		return {$: 'Option', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Model$Left = {$: 'Left'};
+var $mdgriffith$elm_ui$Element$alignLeft = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Left);
+var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
+var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
+var $mdgriffith$elm_ui$Element$Input$defaultRadioOption = F2(
+	function (optionLabel, status) {
+		return A2(
+			$mdgriffith$elm_ui$Element$row,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$spacing(10),
+					$mdgriffith$elm_ui$Element$alignLeft,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width(
+							$mdgriffith$elm_ui$Element$px(14)),
+							$mdgriffith$elm_ui$Element$height(
+							$mdgriffith$elm_ui$Element$px(14)),
+							$mdgriffith$elm_ui$Element$Background$color($mdgriffith$elm_ui$Element$Input$white),
+							$mdgriffith$elm_ui$Element$Border$rounded(7),
+							function () {
+							if (status.$ === 'Selected') {
+								return $mdgriffith$elm_ui$Internal$Model$htmlClass('focusable');
+							} else {
+								return $mdgriffith$elm_ui$Internal$Model$NoAttribute;
+							}
+						}(),
+							$mdgriffith$elm_ui$Element$Border$width(
+							function () {
+								switch (status.$) {
+									case 'Idle':
+										return 1;
+									case 'Focused':
+										return 1;
+									default:
+										return 5;
+								}
+							}()),
+							$mdgriffith$elm_ui$Element$Border$color(
+							function () {
+								switch (status.$) {
+									case 'Idle':
+										return A3($mdgriffith$elm_ui$Element$rgb, 208 / 255, 208 / 255, 208 / 255);
+									case 'Focused':
+										return A3($mdgriffith$elm_ui$Element$rgb, 208 / 255, 208 / 255, 208 / 255);
+									default:
+										return A3($mdgriffith$elm_ui$Element$rgb, 59 / 255, 153 / 255, 252 / 255);
+								}
+							}())
+						]),
+					$mdgriffith$elm_ui$Element$none),
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+							$mdgriffith$elm_ui$Internal$Model$htmlClass('unfocusable')
+						]),
+					optionLabel)
+				]));
+	});
+var $mdgriffith$elm_ui$Element$Input$option = F2(
+	function (val, txt) {
+		return A2(
+			$mdgriffith$elm_ui$Element$Input$Option,
+			val,
+			$mdgriffith$elm_ui$Element$Input$defaultRadioOption(txt));
+	});
+var $mdgriffith$elm_ui$Element$Input$Column = {$: 'Column'};
+var $mdgriffith$elm_ui$Element$Input$AfterFound = {$: 'AfterFound'};
+var $mdgriffith$elm_ui$Element$Input$BeforeFound = {$: 'BeforeFound'};
+var $mdgriffith$elm_ui$Element$Input$Idle = {$: 'Idle'};
+var $mdgriffith$elm_ui$Element$Input$NotFound = {$: 'NotFound'};
+var $mdgriffith$elm_ui$Element$Input$Selected = {$: 'Selected'};
+var $mdgriffith$elm_ui$Element$Input$column = F2(
+	function (attributes, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asColumn,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					attributes)),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
+var $mdgriffith$elm_ui$Element$Input$downArrow = 'ArrowDown';
+var $mdgriffith$elm_ui$Internal$Model$filter = function (attrs) {
+	return A3(
+		$elm$core$List$foldr,
+		F2(
+			function (x, _v0) {
+				var found = _v0.a;
+				var has = _v0.b;
+				switch (x.$) {
+					case 'NoAttribute':
+						return _Utils_Tuple2(found, has);
+					case 'Class':
+						var key = x.a;
+						return _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							has);
+					case 'Attr':
+						var attr = x.a;
+						return _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							has);
+					case 'StyleClass':
+						var style = x.b;
+						return _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							has);
+					case 'Width':
+						var width = x.a;
+						return A2($elm$core$Set$member, 'width', has) ? _Utils_Tuple2(found, has) : _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							A2($elm$core$Set$insert, 'width', has));
+					case 'Height':
+						var height = x.a;
+						return A2($elm$core$Set$member, 'height', has) ? _Utils_Tuple2(found, has) : _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							A2($elm$core$Set$insert, 'height', has));
+					case 'Describe':
+						var description = x.a;
+						return A2($elm$core$Set$member, 'described', has) ? _Utils_Tuple2(found, has) : _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							A2($elm$core$Set$insert, 'described', has));
+					case 'Nearby':
+						var location = x.a;
+						var elem = x.b;
+						return _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							has);
+					case 'AlignX':
+						return A2($elm$core$Set$member, 'align-x', has) ? _Utils_Tuple2(found, has) : _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							A2($elm$core$Set$insert, 'align-x', has));
+					case 'AlignY':
+						return A2($elm$core$Set$member, 'align-y', has) ? _Utils_Tuple2(found, has) : _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							A2($elm$core$Set$insert, 'align-y', has));
+					default:
+						return A2($elm$core$Set$member, 'transform', has) ? _Utils_Tuple2(found, has) : _Utils_Tuple2(
+							A2($elm$core$List$cons, x, found),
+							A2($elm$core$Set$insert, 'transform', has));
+				}
+			}),
+		_Utils_Tuple2(_List_Nil, $elm$core$Set$empty),
+		attrs).a;
+};
+var $mdgriffith$elm_ui$Internal$Model$get = F2(
+	function (attrs, isAttr) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, found) {
+					return isAttr(x) ? A2($elm$core$List$cons, x, found) : found;
+				}),
+			_List_Nil,
+			$mdgriffith$elm_ui$Internal$Model$filter(attrs));
+	});
+var $mdgriffith$elm_ui$Element$Input$leftArrow = 'ArrowLeft';
+var $mdgriffith$elm_ui$Element$Input$onKeyLookup = function (lookup) {
+	var decode = function (code) {
+		var _v0 = lookup(code);
+		if (_v0.$ === 'Nothing') {
+			return $elm$json$Json$Decode$fail('No key matched');
+		} else {
+			var msg = _v0.a;
+			return $elm$json$Json$Decode$succeed(msg);
+		}
+	};
+	var isKey = A2(
+		$elm$json$Json$Decode$andThen,
+		decode,
+		A2($elm$json$Json$Decode$field, 'key', $elm$json$Json$Decode$string));
+	return $mdgriffith$elm_ui$Internal$Model$Attr(
+		A2($elm$html$Html$Events$on, 'keyup', isKey));
+};
+var $mdgriffith$elm_ui$Element$Input$rightArrow = 'ArrowRight';
+var $mdgriffith$elm_ui$Element$Input$row = F2(
+	function (attributes, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asRow,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				attributes),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
+var $mdgriffith$elm_ui$Element$Input$space = ' ';
+var $mdgriffith$elm_ui$Element$Input$tabindex = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Attr, $elm$html$Html$Attributes$tabindex);
+var $mdgriffith$elm_ui$Element$Input$upArrow = 'ArrowUp';
+var $mdgriffith$elm_ui$Element$Input$radioHelper = F3(
+	function (orientation, attrs, input) {
+		var track = F2(
+			function (opt, _v14) {
+				var found = _v14.a;
+				var prev = _v14.b;
+				var nxt = _v14.c;
+				var val = opt.a;
+				switch (found.$) {
+					case 'NotFound':
+						return _Utils_eq(
+							$elm$core$Maybe$Just(val),
+							input.selected) ? _Utils_Tuple3($mdgriffith$elm_ui$Element$Input$BeforeFound, prev, nxt) : _Utils_Tuple3(found, val, nxt);
+					case 'BeforeFound':
+						return _Utils_Tuple3($mdgriffith$elm_ui$Element$Input$AfterFound, prev, val);
+					default:
+						return _Utils_Tuple3(found, prev, nxt);
+				}
+			});
+		var renderOption = function (_v11) {
+			var val = _v11.a;
+			var view = _v11.b;
+			var status = _Utils_eq(
+				$elm$core$Maybe$Just(val),
+				input.selected) ? $mdgriffith$elm_ui$Element$Input$Selected : $mdgriffith$elm_ui$Element$Input$Idle;
+			return A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$pointer,
+						function () {
+						if (orientation.$ === 'Row') {
+							return $mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink);
+						} else {
+							return $mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill);
+						}
+					}(),
+						$mdgriffith$elm_ui$Element$Events$onClick(
+						input.onChange(val)),
+						function () {
+						if (status.$ === 'Selected') {
+							return $mdgriffith$elm_ui$Internal$Model$Attr(
+								A2($elm$html$Html$Attributes$attribute, 'aria-checked', 'true'));
+						} else {
+							return $mdgriffith$elm_ui$Internal$Model$Attr(
+								A2($elm$html$Html$Attributes$attribute, 'aria-checked', 'false'));
+						}
+					}(),
+						$mdgriffith$elm_ui$Internal$Model$Attr(
+						A2($elm$html$Html$Attributes$attribute, 'role', 'radio'))
+					]),
+				view(status));
+		};
+		var prevNext = function () {
+			var _v5 = input.options;
+			if (!_v5.b) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var _v6 = _v5.a;
+				var val = _v6.a;
+				return function (_v7) {
+					var found = _v7.a;
+					var b = _v7.b;
+					var a = _v7.c;
+					switch (found.$) {
+						case 'NotFound':
+							return $elm$core$Maybe$Just(
+								_Utils_Tuple2(b, val));
+						case 'BeforeFound':
+							return $elm$core$Maybe$Just(
+								_Utils_Tuple2(b, val));
+						default:
+							return $elm$core$Maybe$Just(
+								_Utils_Tuple2(b, a));
+					}
+				}(
+					A3(
+						$elm$core$List$foldl,
+						track,
+						_Utils_Tuple3($mdgriffith$elm_ui$Element$Input$NotFound, val, val),
+						input.options));
+			}
+		}();
+		var optionArea = function () {
+			if (orientation.$ === 'Row') {
+				return A2(
+					$mdgriffith$elm_ui$Element$Input$row,
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$Input$hiddenLabelAttribute(input.label),
+						attrs),
+					A2($elm$core$List$map, renderOption, input.options));
+			} else {
+				return A2(
+					$mdgriffith$elm_ui$Element$Input$column,
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$Input$hiddenLabelAttribute(input.label),
+						attrs),
+					A2($elm$core$List$map, renderOption, input.options));
+			}
+		}();
+		var events = A2(
+			$mdgriffith$elm_ui$Internal$Model$get,
+			attrs,
+			function (attr) {
+				_v3$3:
+				while (true) {
+					switch (attr.$) {
+						case 'Width':
+							if (attr.a.$ === 'Fill') {
+								return true;
+							} else {
+								break _v3$3;
+							}
+						case 'Height':
+							if (attr.a.$ === 'Fill') {
+								return true;
+							} else {
+								break _v3$3;
+							}
+						case 'Attr':
+							return true;
+						default:
+							break _v3$3;
+					}
+				}
+				return false;
+			});
+		return A3(
+			$mdgriffith$elm_ui$Element$Input$applyLabel,
+			_Utils_ap(
+				A2(
+					$elm$core$List$filterMap,
+					$elm$core$Basics$identity,
+					_List_fromArray(
+						[
+							$elm$core$Maybe$Just($mdgriffith$elm_ui$Element$alignLeft),
+							$elm$core$Maybe$Just(
+							$mdgriffith$elm_ui$Element$Input$tabindex(0)),
+							$elm$core$Maybe$Just(
+							$mdgriffith$elm_ui$Internal$Model$htmlClass('focus')),
+							$elm$core$Maybe$Just($mdgriffith$elm_ui$Element$Region$announce),
+							$elm$core$Maybe$Just(
+							$mdgriffith$elm_ui$Internal$Model$Attr(
+								A2($elm$html$Html$Attributes$attribute, 'role', 'radiogroup'))),
+							function () {
+							if (prevNext.$ === 'Nothing') {
+								return $elm$core$Maybe$Nothing;
+							} else {
+								var _v1 = prevNext.a;
+								var prev = _v1.a;
+								var next = _v1.b;
+								return $elm$core$Maybe$Just(
+									$mdgriffith$elm_ui$Element$Input$onKeyLookup(
+										function (code) {
+											if (_Utils_eq(code, $mdgriffith$elm_ui$Element$Input$leftArrow)) {
+												return $elm$core$Maybe$Just(
+													input.onChange(prev));
+											} else {
+												if (_Utils_eq(code, $mdgriffith$elm_ui$Element$Input$upArrow)) {
+													return $elm$core$Maybe$Just(
+														input.onChange(prev));
+												} else {
+													if (_Utils_eq(code, $mdgriffith$elm_ui$Element$Input$rightArrow)) {
+														return $elm$core$Maybe$Just(
+															input.onChange(next));
+													} else {
+														if (_Utils_eq(code, $mdgriffith$elm_ui$Element$Input$downArrow)) {
+															return $elm$core$Maybe$Just(
+																input.onChange(next));
+														} else {
+															if (_Utils_eq(code, $mdgriffith$elm_ui$Element$Input$space)) {
+																var _v2 = input.selected;
+																if (_v2.$ === 'Nothing') {
+																	return $elm$core$Maybe$Just(
+																		input.onChange(prev));
+																} else {
+																	return $elm$core$Maybe$Nothing;
+																}
+															} else {
+																return $elm$core$Maybe$Nothing;
+															}
+														}
+													}
+												}
+											}
+										}));
+							}
+						}()
+						])),
+				events),
+			input.label,
+			optionArea);
+	});
+var $mdgriffith$elm_ui$Element$Input$radio = $mdgriffith$elm_ui$Element$Input$radioHelper($mdgriffith$elm_ui$Element$Input$Column);
+var $author$project$Main$reflectorA = 'EJMZALYXVBWFCRQUONTSPIKHGD';
+var $author$project$Main$reflectorC = 'FVPJIAOYEDRZXWGCTKUQSBNMHL';
+var $author$project$Main$reflectorUKW = 'QYHOGNECVPUZTFDJAXWMKISRBL';
+var $author$project$Main$rotor4 = A4($author$project$Main$Rotor, 'ESOVPZJAYQUIRHXLNFTGKDCMWB', 0, 9, 9);
+var $author$project$Main$rotor5 = A4($author$project$Main$Rotor, 'VZBRGITYUPSDNHLXAWMJQOFECK', 0, 25, 25);
+var $author$project$Main$rotor6 = A4($author$project$Main$Rotor, 'JPGVOUMFYQBENHZRDKASXLICTW', 0, 25, 12);
+var $author$project$Main$rotor7 = A4($author$project$Main$Rotor, 'NZJHGRCXMYSWBOUFAIVLPEKQDT', 0, 25, 12);
+var $author$project$Main$rotor8 = A4($author$project$Main$Rotor, 'FKQHTLXOCBJSPDZRAMEWNIUYGV', 0, 25, 12);
+var $author$project$Main$rotorButtons = function (model) {
+	return A2(
+		$mdgriffith$elm_ui$Element$row,
+		_List_fromArray(
+			[$mdgriffith$elm_ui$Element$alignTop]),
+		_List_fromArray(
+			[
+				A2(
+				$mdgriffith$elm_ui$Element$Input$radio,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$spacing(12),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Main$grey)
+					]),
+				{
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$size(14),
+								A2($mdgriffith$elm_ui$Element$paddingXY, 0, 12)
+							]),
+						$mdgriffith$elm_ui$Element$text('Reflector')),
+					onChange: function (_new) {
+						return $author$project$Main$ChangeReflector(_new);
+					},
+					options: _List_fromArray(
+						[
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$reflectorA,
+							$mdgriffith$elm_ui$Element$text('Reflector A')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$reflectorB,
+							$mdgriffith$elm_ui$Element$text('Reflector B')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$reflectorC,
+							$mdgriffith$elm_ui$Element$text('Reflector C')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$reflectorUKW,
+							$mdgriffith$elm_ui$Element$text('Reflector UKW'))
+						]),
+					selected: $elm$core$Maybe$Just(model.reflector)
+				}),
+				A2(
+				$mdgriffith$elm_ui$Element$Input$radio,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$spacing(12),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Main$grey)
+					]),
+				{
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$size(14),
+								A2($mdgriffith$elm_ui$Element$paddingXY, 0, 12)
+							]),
+						$mdgriffith$elm_ui$Element$text('Left Rotor')),
+					onChange: function (_new) {
+						return $author$project$Main$ChangeRotorL(_new);
+					},
+					options: _List_fromArray(
+						[
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor1,
+							$mdgriffith$elm_ui$Element$text('Rotor I')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor2,
+							$mdgriffith$elm_ui$Element$text('Rotor II')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor3,
+							$mdgriffith$elm_ui$Element$text('Rotor III')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor4,
+							$mdgriffith$elm_ui$Element$text('Rotor IV')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor5,
+							$mdgriffith$elm_ui$Element$text('Rotor V')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor6,
+							$mdgriffith$elm_ui$Element$text('Rotor VI')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor7,
+							$mdgriffith$elm_ui$Element$text('Rotor VII')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor8,
+							$mdgriffith$elm_ui$Element$text('Rotor VIII'))
+						]),
+					selected: $elm$core$Maybe$Just(model.rotorL)
+				}),
+				A2(
+				$mdgriffith$elm_ui$Element$Input$radio,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$spacing(12),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Main$grey)
+					]),
+				{
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$size(14),
+								A2($mdgriffith$elm_ui$Element$paddingXY, 0, 12)
+							]),
+						$mdgriffith$elm_ui$Element$text('Middle Rotor')),
+					onChange: function (_new) {
+						return $author$project$Main$ChangeRotorM(_new);
+					},
+					options: _List_fromArray(
+						[
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor1,
+							$mdgriffith$elm_ui$Element$text('Rotor I')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor2,
+							$mdgriffith$elm_ui$Element$text('Rotor II')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor3,
+							$mdgriffith$elm_ui$Element$text('Rotor III')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor4,
+							$mdgriffith$elm_ui$Element$text('Rotor IV')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor5,
+							$mdgriffith$elm_ui$Element$text('Rotor V')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor6,
+							$mdgriffith$elm_ui$Element$text('Rotor VI')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor7,
+							$mdgriffith$elm_ui$Element$text('Rotor VII')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor8,
+							$mdgriffith$elm_ui$Element$text('Rotor VIII'))
+						]),
+					selected: $elm$core$Maybe$Just(model.rotorM)
+				}),
+				A2(
+				$mdgriffith$elm_ui$Element$Input$radio,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$spacing(12),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Main$grey)
+					]),
+				{
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$size(14),
+								A2($mdgriffith$elm_ui$Element$paddingXY, 0, 12)
+							]),
+						$mdgriffith$elm_ui$Element$text('Right Rotor')),
+					onChange: function (_new) {
+						return $author$project$Main$ChangeRotorR(_new);
+					},
+					options: _List_fromArray(
+						[
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor1,
+							$mdgriffith$elm_ui$Element$text('Rotor I')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor2,
+							$mdgriffith$elm_ui$Element$text('Rotor II')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor3,
+							$mdgriffith$elm_ui$Element$text('Rotor III')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor4,
+							$mdgriffith$elm_ui$Element$text('Rotor IV')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor5,
+							$mdgriffith$elm_ui$Element$text('Rotor V')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor6,
+							$mdgriffith$elm_ui$Element$text('Rotor VI')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor7,
+							$mdgriffith$elm_ui$Element$text('Rotor VII')),
+							A2(
+							$mdgriffith$elm_ui$Element$Input$option,
+							$author$project$Main$rotor8,
+							$mdgriffith$elm_ui$Element$text('Rotor VIII'))
+						]),
+					selected: $elm$core$Maybe$Just(model.rotorR)
+				})
+			]));
+};
 var $author$project$Main$view = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$layout,
 		_List_Nil,
-		$author$project$Main$enigmaView(model));
+		A2(
+			$mdgriffith$elm_ui$Element$row,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$author$project$Main$enigmaView(model),
+					$author$project$Main$rotorButtons(model)
+				])));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
 	{init: $author$project$Main$init, update: $author$project$Main$update, view: $author$project$Main$view});
